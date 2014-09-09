@@ -5,12 +5,14 @@
 	 	*/
 
 		function DaysBetweenDates($firstDate, $secondDate){
-			if(!$firstDate instanceof DateTime){
-					throw new InvalidArgumentException('Invalid Datetime (firstDate:'.$firstDate.')');
-			}
-			if(!$secondDate instanceof DateTime){
-				throw new InvalidArgumentException('Invalid Datetime (secondDate:'.$secondDate.')');
-			}
+			$this->validateDates(array($firstDate,$secondDate));
+			// if(!$firstDate instanceof DateTime){
+			// 		throw new InvalidArgumentException('Invalid Datetime (firstDate:'.$firstDate.')');
+			// }
+			// if(!$secondDate instanceof DateTime){
+			// 	throw new InvalidArgumentException('Invalid Datetime (secondDate:'.$secondDate.')');
+			// }
+
 			$diff = $firstDate->diff($secondDate);
 			return $diff->days;
 		}
@@ -126,8 +128,16 @@
 
 			}
 		}
+		function validateDates($dates){
+			print_r($dates);
+			foreach($dates as $date){
+				if(!$date instanceof DateTime){
+					throw new InvalidArgumentException('Invalid Datetime ('.$date.')');
+				}
+			}
+		}
 
-		function GetTimezones($defaultTimezone){
+		function GetTimezones(){
 			$output = "";
 			$timezones = DateTimeZone::listAbbreviations();
 			$cities = array();
@@ -141,21 +151,15 @@
 			         */
 			        if ( preg_match( '/^(America|Antartica|Arctic|Australia|Asia|Atlantic|Europe|Indian|Pacific)\//', $zone['timezone_id'] ) 
 			    		&& $zone['timezone_id']) {	        	
-			            $cities[] = $zone['timezone_id'];// . ' (' . round($zone['offset']/3600,2) . ')';
+			            $cities[] = $zone['timezone_id'];
 			    	}
 			    }
 			}
 
 			$cities = array_unique( $cities );
 
-			// Sort by area/city name.
-			sort( $cities );
-			foreach ($cities as $city) {
-				$selected = ($city==$defaultTimezone?"selected":"");
-				$output  .= '<option '.$selected.'>' . $city .'</option>';
-			}
-
-			return $output;
+			// Sort by area/city name and return.
+			return sort($cities);
 		}
 		/**
 		*	5. Allow the specification of a timezone for comparison of input parameters from different timezones. 

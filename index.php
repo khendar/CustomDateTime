@@ -41,7 +41,6 @@
 
 						 ?>
 					</select>
-
 			</div>
 			<div class="row">
 				<label>Second Date:</label>
@@ -78,41 +77,45 @@
 		$formatString = 'Y-m-d H:i:s T';
 		$diff = $dt->DaysBetweenDates($dateOne,$dateTwo ,'d') ;
 		try{
-			echo '<h2>Days Between Dates</h2>';
-			echo '<h3>'. $dateOne->format($formatString) . ' to ' . $dateTwo->format($formatString).'</h3>';
-			echo '<ol>';
-			echo '<li>Seconds = '.$dt->DaysBetweenDates($dateOne,$dateTwo,'s' ) .' seconds</li>';
-			echo '<li>Minutes = '.$dt->DaysBetweenDates($dateOne,$dateTwo,'m' ) .' minutes</li>';
-			echo '<li>Hours = '.$dt->DaysBetweenDates($dateOne,$dateTwo,'h' ) .' hours</li>';
-			echo '<li>Days = '.$dt->DaysBetweenDates($dateOne,$dateTwo ) .' days</li>';
-			echo '<li>Years = '.$dt->DaysBetweenDates($dateOne,$dateTwo,'y' ) .' years</li>';
-			echo "</ol>";
-
+			?>
+			<h2>Days Between Dates</h2>
+			<h3><?= $dateOne->format($formatString) ?> to <?= $dateTwo->format($formatString)?></h3>
+			<ol>
+				<li>Seconds = <?= $dt->DaysBetweenDates($dateOne,$dateTwo,'s' ) ?> seconds</li>
+				<li>Minutes = <?= $dt->DaysBetweenDates($dateOne,$dateTwo,'m' ) ?> minutes</li>
+				<li>Hours = <?= $dt->DaysBetweenDates($dateOne,$dateTwo,'h' ) ?> hours</li>
+				<li>Days = <?= $dt->DaysBetweenDates($dateOne,$dateTwo ) ?> days</li>
+				<li>Years = <?= $dt->DaysBetweenDates($dateOne,$dateTwo,'y' ) ?> years</li>
+			</ol>
+			<?php
 		}
 		catch (Exception $e){print ('Caught Exception: ' . $e->getMessage()."\n");}	
 		try{
-			echo '<h2>Weekdays Between Dates</h2>';
-			echo '<h3>'. $dateOne->format($formatString) . ' to ' . $dateTwo->format($formatString).'</h3>';
-			echo '<ol>';
-			echo '<li>Seconds = '.$dt->WeekdaysBetweenDates($dateOne,$dateTwo,'s' ) .' seconds</li>';
-			echo '<li>Minutes = '.$dt->WeekdaysBetweenDates($dateOne,$dateTwo,'m' ) .' minutes</li>';
-			echo '<li>Hours = '.$dt->WeekdaysBetweenDates($dateOne,$dateTwo,'h' ) .' hours</li>';
-			echo '<li>Days = '.$dt->WeekdaysBetweenDates($dateOne,$dateTwo ) .' days</li>';
-			echo '<li>Years = '.$dt->WeekdaysBetweenDates($dateOne,$dateTwo,'y' ) .' years</li>';
-			echo '</ol>';
-
+			?>
+			<h2>Weekdays Between Dates</h2>
+			<h3><?= $dateOne->format($formatString) ?> to <?= $dateTwo->format($formatString) ?></h3>
+			<ol>
+				<li>Seconds = <?= $dt->WeekdaysBetweenDates($dateOne,$dateTwo,'s' ) ?> seconds</li>
+				<li>Minutes = <?= $dt->WeekdaysBetweenDates($dateOne,$dateTwo,'m' ) ?> minutes</li>
+				<li>Hours = <?= $dt->WeekdaysBetweenDates($dateOne,$dateTwo,'h' ) ?> hours</li>
+				<li>Days = <?= $dt->WeekdaysBetweenDates($dateOne,$dateTwo ) ?> days</li>
+				<li>Years = <?= $dt->WeekdaysBetweenDates($dateOne,$dateTwo,'y' ) ?> years</li>
+			</ol>
+			<?php
 		}
 		catch (Exception $e){print ('Caught Exception: ' . $e->getMessage()."\n");}	
 		try{
-			echo '<h2>Complete Weeks</h2>';
-			echo '<h3>'. $dateOne->format($formatString) . ' to ' . $dateTwo->format($formatString).'</h3>';
-			echo '<ol>';
-			echo '<li>Seconds = '.$dt->CompleteWeeks($dateOne,$dateTwo,'s' ) .' seconds</li>';
-			echo '<li>Minutes = '.$dt->CompleteWeeks($dateOne,$dateTwo,'m' ) .' minutes</li>';
-			echo '<li>Hours = '.$dt->CompleteWeeks($dateOne,$dateTwo,'h' ) .' hours</li>';
-			echo '<li>Days = '.$dt->CompleteWeeks($dateOne,$dateTwo ) .' days</li>';
-			echo '<li>Years = '.$dt->CompleteWeeks($dateOne,$dateTwo,'y' ) .' years</li>';
-			echo '</ol>';
+			?>
+			<h2>Complete Weeks</h2>
+			<h3><?= $dateOne->format($formatString) ?> to <?= $dateTwo->format($formatString) ?></h3>
+			<ol>
+				<li>Seconds = <?= $dt->CompleteWeeks($dateOne,$dateTwo,'s' ) ?> seconds</li>
+				<li>Minutes = <?= $dt->CompleteWeeks($dateOne,$dateTwo,'m' ) ?> minutes</li>
+				<li>Hours = <?= $dt->CompleteWeeks($dateOne,$dateTwo,'h' ) ?> hours</li>
+				<li>Days = <?= $dt->CompleteWeeks($dateOne,$dateTwo ) ?> days</li>
+				<li>Years = <?= $dt->CompleteWeeks($dateOne,$dateTwo,'y' ) ?> years</li>
+			</ol>
+			<?php
 		}
 		catch (Exception $e){print ('Caught Exception: ' . $e->getMessage()."\n");}	
 	}

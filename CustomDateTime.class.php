@@ -1,18 +1,30 @@
 <?php
 	class CustomDateTime{
-
+		/**
+		*	Finds number of days between two dates
+		*	@param DateTime $firstDate
+		*	@param DateTime $secondDate
+		*	@param char $mod
+		*	@return string
+		*/
 		function DaysBetweenDates($firstDate, $secondDate, $mod = 'd'){
 			$this->validateDates(array($firstDate,$secondDate));
-			
 			$diff = $firstDate->diff($secondDate);
 			return $this->convertInterval($diff,$mod);
 		
 		}
 
+		/**
+		*	Finds number of weekdays between two dates
+		*	@param DateTime $firstDate
+		*	@param DateTime $secondDate
+		*	@param char $mod
+		*	@return string
+		*/
 		function WeekdaysBetweenDates($firstDate, $secondDate,$mod='d'){
 			$this->validateDates(array($firstDate,$secondDate));
 			$aWorkingDays = array(1,2,3,4,5);
-			$workingDays = 0;
+			$iWorkingDays = 0;
 			if($firstDate < $secondDate){
 				$fromDate  = clone $firstDate;
 				$toDate = clone $secondDate;
@@ -21,21 +33,27 @@
 				$fromDate = clone $secondDate;
 				$toDate = clone $firstDate;
 			}
-
 			$interval = new DateInterval('P1D');
 			$periods = new DatePeriod($fromDate, $interval, $toDate);
 			foreach($periods as $period){
 				if(!in_array($period->format('N'),$aWorkingDays)) continue;
-				$workingDays++;
+				$iWorkingDays++;
 			}
-			$interval = new DateInterval("P".$workingDays."D");
+			$interval = new DateInterval("P".$iWorkingDays."D");
 			return $this->convertInterval($interval,$mod);
 		}
 
+		/**
+		*	Finds number of complete weeks between two dates
+		*	@param DateTime $firstDate
+		*	@param DateTime $secondDate
+		*	@param char $mod
+		*	@return string
+		*/
 		function CompleteWeeks ($firstDate, $secondDate, $mod = 'd'){
 			$totalDays = $this->DaysBetweenDates($firstDate,$secondDate,'d');
-			$completeWeeks = floor($totalDays/7);
-			$interval = new DateInterval("P".$completeWeeks."W");
+			$iCompleteWeeks = floor($totalDays/7);
+			$interval = new DateInterval("P".$iCompleteWeeks."W");
 			return $this->convertInterval($interval,$mod);
 		}
 
@@ -46,7 +64,6 @@
 		*	@return string
 		*/
 		function convertInterval($interval, $mod='d'){
-
 			$useDays = $interval->days==null?$interval->d:$interval->days;
 			switch($mod){
 				case 's':
@@ -63,9 +80,14 @@
 			 	break;
 				default:
 					return $useDays;
-
 			}
 		}
+
+		/**
+		*	Checks type of passed parameters and throws an exception if not valid DateTime
+		*	@param Array $dates
+		*	@return void
+		*/
 		function validateDates($dates){
 			foreach($dates as $date){
 				if(!$date instanceof DateTime){
@@ -74,6 +96,10 @@
 			}
 		}
 
+		/**
+		*	Produces an Array of timezones
+		*	@return Array $cities
+		*/
 		function GetTimezones(){
 			$output = "";
 			$timezones = DateTimeZone::listAbbreviations();

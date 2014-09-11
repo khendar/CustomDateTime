@@ -1,0 +1,35 @@
+*, body, html {
+	font-family: helvetica;
+}
+.label,label{
+	width:100px;
+	display:inline-block;
+	font-weight:bold;
+	font-size:14px;
+}
+
+.dateForm .row{
+	padding:10px;
+}
+input[type="text"],select {
+	padding:  10px;
+}
+input[type="submit"]{
+	padding:10px 20px;
+}
+
+ol,ul{
+	margin:30px 0;
+	padding:0;
+}
+ol li ,ul li{
+	padding:10px ;	
+	list-style-position:inside;
+	font-size:14px;
+
+}
+ol li:nth-child(odd),ul li:nth-child(odd){
+	background-color:#efefef;
+}
+
+
